@@ -59,7 +59,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="O2B-v9-nMs">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="wML-rX-PxJ"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fqc-Cs-q30">
                             <connections>
                                 <segue destination="su3-RP-ZNL" kind="show" id="3Lj-Jp-YEW"/>
@@ -96,52 +95,71 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mYN-NQ-SOr">
-                                <rect key="frame" x="10" y="176" width="355" height="120"/>
+                                <rect key="frame" x="10" y="247" width="355" height="120"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="4gy-Yk-8lK"/>
+                                    <constraint firstAttribute="height" constant="120" id="tW0-wW-y2i"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hw3-RF-Ooc">
-                                <rect key="frame" x="0.0" y="306" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="377" width="375" height="120"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="nda-L2-NFw"/>
+                                    <constraint firstAttribute="height" constant="120" id="HMq-t4-fen"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="566139157.79212701">
                                     <!--2018-12-10 12:52:37 +0000-->
                                 </date>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HD3-aF-QW1">
+                                <rect key="frame" x="10" y="216" width="375" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="or6-FK-5cY">
                                 <rect key="frame" x="10" y="145" width="355" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5o-mY-ksz">
+                                <rect key="frame" x="10" y="176" width="355" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fji-9H-Al6" firstAttribute="trailing" secondItem="HD3-aF-QW1" secondAttribute="trailing" constant="10" id="0tf-kZ-Qlw"/>
-                            <constraint firstItem="HD3-aF-QW1" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="C1c-pA-Uba"/>
-                            <constraint firstItem="Hw3-RF-Ooc" firstAttribute="top" secondItem="mYN-NQ-SOr" secondAttribute="bottom" constant="10" id="Ek4-uN-GBS"/>
+                            <constraint firstAttribute="trailing" secondItem="mYN-NQ-SOr" secondAttribute="trailing" constant="10" id="0xV-x7-zx8"/>
+                            <constraint firstItem="or6-FK-5cY" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="2Ee-BC-894"/>
+                            <constraint firstItem="HD3-aF-QW1" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="2kH-Ge-MOD"/>
+                            <constraint firstItem="mYN-NQ-SOr" firstAttribute="top" secondItem="HD3-aF-QW1" secondAttribute="bottom" constant="10" id="Cut-sO-LnA"/>
+                            <constraint firstItem="fji-9H-Al6" firstAttribute="trailing" secondItem="or6-FK-5cY" secondAttribute="trailing" constant="10" id="EvK-jm-5T1"/>
                             <constraint firstItem="ot0-if-LBu" firstAttribute="top" secondItem="fji-9H-Al6" secondAttribute="top" constant="10" id="Ich-ny-qjj"/>
-                            <constraint firstItem="mYN-NQ-SOr" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="Rdv-t3-CXN"/>
+                            <constraint firstItem="fji-9H-Al6" firstAttribute="trailing" secondItem="n5o-mY-ksz" secondAttribute="trailing" constant="10" id="Rz5-nZ-uil"/>
                             <constraint firstItem="fji-9H-Al6" firstAttribute="trailing" secondItem="pVt-Pu-hJG" secondAttribute="trailing" constant="10" id="T1e-ME-yrn"/>
-                            <constraint firstItem="mYN-NQ-SOr" firstAttribute="top" secondItem="HD3-aF-QW1" secondAttribute="bottom" constant="10" id="VEn-JE-fEa"/>
+                            <constraint firstItem="Hw3-RF-Ooc" firstAttribute="trailing" secondItem="fji-9H-Al6" secondAttribute="trailing" id="TrP-D1-iBP"/>
                             <constraint firstItem="pVt-Pu-hJG" firstAttribute="top" secondItem="ot0-if-LBu" secondAttribute="bottom" constant="10" id="ZPp-qj-vZD"/>
                             <constraint firstItem="fji-9H-Al6" firstAttribute="trailing" secondItem="ot0-if-LBu" secondAttribute="trailing" constant="10" id="a2H-z8-hK6"/>
-                            <constraint firstItem="HD3-aF-QW1" firstAttribute="top" secondItem="pVt-Pu-hJG" secondAttribute="bottom" constant="10" id="dAQ-uf-mKW"/>
+                            <constraint firstItem="n5o-mY-ksz" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="eUj-mw-G73"/>
+                            <constraint firstItem="HD3-aF-QW1" firstAttribute="trailing" secondItem="fji-9H-Al6" secondAttribute="trailing" constant="10" id="g1n-7t-NyA"/>
+                            <constraint firstItem="n5o-mY-ksz" firstAttribute="top" secondItem="or6-FK-5cY" secondAttribute="bottom" constant="10" id="h6d-Zr-UDJ"/>
+                            <constraint firstItem="or6-FK-5cY" firstAttribute="top" secondItem="pVt-Pu-hJG" secondAttribute="bottom" constant="10" id="iBQ-DT-fxs"/>
+                            <constraint firstItem="HD3-aF-QW1" firstAttribute="top" secondItem="n5o-mY-ksz" secondAttribute="bottom" constant="10" id="j72-zC-Inq"/>
+                            <constraint firstItem="mYN-NQ-SOr" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="n8b-46-GHu"/>
                             <constraint firstItem="pVt-Pu-hJG" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="nal-7B-juy"/>
                             <constraint firstItem="ot0-if-LBu" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" constant="10" id="q2M-ZO-DvU"/>
-                            <constraint firstItem="Hw3-RF-Ooc" firstAttribute="trailing" secondItem="fji-9H-Al6" secondAttribute="trailing" id="rMq-qX-5lZ"/>
-                            <constraint firstItem="fji-9H-Al6" firstAttribute="trailing" secondItem="mYN-NQ-SOr" secondAttribute="trailing" constant="10" id="ujR-8I-jAc"/>
-                            <constraint firstItem="Hw3-RF-Ooc" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" id="vuT-5x-z6J"/>
+                            <constraint firstItem="Hw3-RF-Ooc" firstAttribute="top" secondItem="mYN-NQ-SOr" secondAttribute="bottom" constant="10" id="vsq-bU-odl"/>
+                            <constraint firstItem="Hw3-RF-Ooc" firstAttribute="leading" secondItem="fji-9H-Al6" secondAttribute="leading" id="yRW-JC-Sht"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fji-9H-Al6"/>
                     </view>
                     <connections>
+                        <outlet property="categoryTextFild" destination="n5o-mY-ksz" id="rko-7u-5pv"/>
                         <outlet property="contentsTextView" destination="mYN-NQ-SOr" id="3AO-IR-c5w"/>
                         <outlet property="datePicker" destination="Hw3-RF-Ooc" id="zyA-5j-PRg"/>
                         <outlet property="titleTextField" destination="pVt-Pu-hJG" id="3cQ-8z-f1T"/>

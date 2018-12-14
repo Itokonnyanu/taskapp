@@ -83,7 +83,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         let dateString:String = formatter.string(from: task.date)
         //サブタイトルのテキストを設定
-        cell.detailTextLabel?.text = dateString
+        cell.detailTextLabel?.text = dateString + ":    \(task.category)"
+        
         
         return cell
     }
