@@ -10,9 +10,17 @@ import UIKit
 import RealmSwift
 import UserNotifications
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+   
+    
 
     @IBOutlet weak var tableView: UITableView!
+    
+    
+    var searchResults:[String] = []
+    var searchController = UISearchController()
+
+    
     // Realmインスタンスを取得する
     let realm = try! Realm()  
     
@@ -27,8 +35,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-     
-
+        //これいる？
+        searchController = UISearchController(searchResultsController: nil)
+        //デリゲートみたいなの
+        searchController.searchResultsUpdater = self
+        //場所設定
+        searchController.searchBar.sizeToFit()
+        tableView.tableHeaderView = searchController.searchBar
+        //その他設定
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+      //categoryArrayにcategoryを入れる
+        for item in taskArray{
+            categoryArray.append(item.category)
+        }
+       
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -61,17 +83,53 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
+    
     // MARK: UITableViewDataSourceプロトコルのメソッド
     // データの数（＝セルの数）を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count  // ←追加する
+        
+        if searchController.isActive {
+            
+            return searchResults.count
+        } else {
+            return taskArray.count
+        }
+        
+
     }
     
     // テーブルビュー上で表示する時の各セルの内容を返すメソッド
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 再利用可能な cell を得る
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        //検索バーが起動中か否か
+        if searchController.isActive {
+            //検索したカテゴリーを含むタスクから新しい配列を作る
+            let newArray = taskArray.filter({(task:Task) -> Bool in
+                return (self.searchResults.contains(task.category))
+            })
+            print(newArray)
+            let task = newArray[indexPath.row]
+            //データベースからテキストに代入
+            cell.textLabel?.text = task.title
+            
+            //datefomatterを取得
+            let formatter = DateFormatter()
+            //日付の形式に｀2018-12-12 15:18｀ のような文字列を設定。他の設定の仕方はdatefomatterの使い方を調べて。
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let dateString:String = formatter.string(from: task.date)
+            
+            //カテゴリーだけの色を変換
+            let main_string = dateString + ":    \(task.category)"
+            let string_to_color = task.category
+            let range = (main_string as NSString).range(of: string_to_color)
+            let attribute = NSMutableAttributedString.init(string: main_string)
+            //カテゴリーの色を赤色に
+            attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.red , range: range)
+            //サブタイトルのテキストを設定
+            cell.detailTextLabel?.attributedText = attribute
+           
+        } else {
         // Cellに値を設定する.
         let task = taskArray[indexPath.row]
         //データベースからテキストに代入
@@ -82,12 +140,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //日付の形式に｀2018-12-12 15:18｀ のような文字列を設定。他の設定の仕方はdatefomatterの使い方を調べて。
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         let dateString:String = formatter.string(from: task.date)
-        //サブタイトルのテキストを設定
-        cell.detailTextLabel?.text = dateString + ":    \(task.category)"
+            //カテゴリーだけの色を変換
+            let main_string = dateString + "     \(task.category)"
+            let string_to_color = task.category
+            let range = (main_string as NSString).range(of: string_to_color)
+            let attribute = NSMutableAttributedString.init(string: main_string)
+            //カテゴリーの色を灰色に
+            attribute.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.darkGray , range: range)
+            //サブタイトルのテキストを設定
+            cell.detailTextLabel?.attributedText = attribute
         
-        
+        }
         return cell
     }
+    
+    
+    //taskのcategoryのみの配列を作る
+    var categoryArray = [String]()
+    
+    // 文字が入力される度に呼ばれる
+    func updateSearchResults(for searchController: UISearchController) {
+        //大文字小文字に関係しないカテゴリーの検索
+        self.searchResults = categoryArray.filter({(category: String) -> Bool in
+            return (category.lowercased().contains(searchController.searchBar.text!.lowercased()))
+           
+        })
+        self.tableView.reloadData()
+     
+        }
+       
+    
     
     // MARK: UITableViewDelegateプロトコルのメソッド
     // 各セルを選択した時に実行されるメソッド
