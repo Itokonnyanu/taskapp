@@ -108,7 +108,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let newArray = taskArray.filter({(task:Task) -> Bool in
                 return (self.searchResults.contains(task.category))
             })
+            
+            //なぜかnewArrayにfilterがかかってない。
             print(newArray)
+            //条件が全部trueな訳ではない。
+            for item in taskArray{
+                print(self.searchResults.contains(item.category))
+            }
+
+            
             let task = newArray[indexPath.row]
             //データベースからテキストに代入
             cell.textLabel?.text = task.title
@@ -130,16 +138,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.detailTextLabel?.attributedText = attribute
            
         } else {
-        // Cellに値を設定する.
-        let task = taskArray[indexPath.row]
-        //データベースからテキストに代入
-        cell.textLabel?.text = task.title
+            // Cellに値を設定する.
+            let task = taskArray[indexPath.row]
+            //データベースからテキストに代入
+            cell.textLabel?.text = task.title
         
-        //datefomatterを取得
-        let formatter = DateFormatter()
-        //日付の形式に｀2018-12-12 15:18｀ のような文字列を設定。他の設定の仕方はdatefomatterの使い方を調べて。
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let dateString:String = formatter.string(from: task.date)
+            //datefomatterを取得
+            let formatter = DateFormatter()
+            //日付の形式に｀2018-12-12 15:18｀ のような文字列を設定。他の設定の仕方はdatefomatterの使い方を調べて。
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let dateString:String = formatter.string(from: task.date)
             //カテゴリーだけの色を変換
             let main_string = dateString + "     \(task.category)"
             let string_to_color = task.category
