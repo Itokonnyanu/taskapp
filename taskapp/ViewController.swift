@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     
     
-    var searchResults:[String] = []
+    var searchResults: Results<Task>!
     var searchController = UISearchController()
 
     
@@ -46,11 +46,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         
-      //categoryArrayにcategoryを入れる
-        for item in taskArray{
-            categoryArray.append(item.category)
-        }
-       
+    
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -104,20 +100,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         //検索バーが起動中か否か
         if searchController.isActive {
-            //検索したカテゴリーを含むタスクから新しい配列を作る
-            let newArray = taskArray.filter({(task:Task) -> Bool in
-                return (self.searchResults.contains(task.category))
-            })
-            
-            //なぜかnewArrayにfilterがかかってない。
-            print(newArray)
-            //条件が全部trueな訳ではない。
-            for item in taskArray{
-                print(self.searchResults.contains(item.category))
-            }
-
-            
-            let task = newArray[indexPath.row]
+         
+            let task = searchResults[indexPath.row]
             //データベースからテキストに代入
             cell.textLabel?.text = task.title
             
@@ -162,17 +146,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    
-    //taskのcategoryのみの配列を作る
-    var categoryArray = [String]()
-    
     // 文字が入力される度に呼ばれる
     func updateSearchResults(for searchController: UISearchController) {
         //大文字小文字に関係しないカテゴリーの検索
-        self.searchResults = categoryArray.filter({(category: String) -> Bool in
-            return (category.lowercased().contains(searchController.searchBar.text!.lowercased()))
-           
-        })
+        self.searchResults = taskArray.realm?.objects(Task.self).filter(
+            "category contains %@", searchController.searchBar.text!)
         self.tableView.reloadData()
      
         }
