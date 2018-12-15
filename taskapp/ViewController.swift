@@ -95,7 +95,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return taskArray.count
         }
         
-
+ 
     }
     
     // テーブルビュー上で表示する時の各セルの内容を返すメソッド
